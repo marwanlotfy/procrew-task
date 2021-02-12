@@ -1,17 +1,17 @@
 version: '3'
 services: 
-  # api_gateway:
-  #   container_name: api_gateway
-  #   networks: 
-  #     - procrew
-  #   build: 
-  #     context: ./gateway
-  #     dockerfile: Dockerfile
-  #   depends_on: 
-  #     - user_create_service
-  #     - user_list_service
-  #   ports: 
-  #     - "81:80"
+  api_gateway:
+    container_name: api_gateway
+    networks: 
+      - procrew
+    build: 
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on: 
+      - user_create_service
+      - user_list_service
+    ports: 
+      - "81:80"
 
   rabbitmq3:
     container_name: rabbitmq3 
