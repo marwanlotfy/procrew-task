@@ -1,0 +1,69 @@
+version: '3'
+services: 
+  rabbitmq3:
+    container_name: rabbitmq3 
+    networks: 
+      - procrew
+    image: rabbitmq:3-management
+    volumes: 
+      - ./queue-data:/var/lib/rabbitmq
+    
+  queue_worker:
+    container_name: queue_worker 
+    networks: 
+      - procrew
+    build: 
+      context: ./queue-worker
+      dockerfile: Dockerfile
+    depends_on: 
+      - db
+      - rabbitmq3 
+
+  user_create_service:
+    container_name: user_create_service
+    networks: 
+      - procrew
+    build: 
+      context: ./user-create-service
+      dockerfile: Dockerfile
+    depends_on: 
+      - db
+    ports: 
+      - "3000:3000"
+  user_list_service:
+    container_name: user_list_service
+    networks:
+      - procrew 
+    build: 
+      context: ./user-list-service 
+      dockerfile: Dockerfile
+    depends_on: 
+      - db
+    ports: 
+      - "8000:8000"
+    links: 
+      - db
+  db:
+    networks: 
+      - procrew 
+    image: mysql:8.0
+    container_name: user_repository_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: '12345678'
+      MYSQL_DATABASE: 'user_repository'
+    cap_add: 
+      - SYS_NICE
+    volumes: 
+      - ./mysql:/var/lib/mysql
+  migration:
+    networks: 
+      - procrew
+    image: procrew_user_list_service:latest
+    command: ["./wait-for-it.git/wait-for-it.sh", "db:3306", "--", "composer", "run", "migrate"]
+    depends_on: 
+      - db
+    links: 
+      - db
+networks: 
+  procrew:

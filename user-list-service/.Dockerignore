@@ -1,0 +1,6 @@
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/phpunit.xml.dist
+.phpunit.result.cache
