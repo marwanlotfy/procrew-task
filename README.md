@@ -28,5 +28,5 @@ from the browser or `GET` request from [postman]([https://www.postman.com/downlo
 ![Database Diagram](https://github.com/marwanlotfy/procrew-task/blob/master/user_repository_db_digram.png)
 
 ## Features
-
+Click Thumbnail to watch the video !
 [![Watch the video](https://www.loom.com/i/bf445c87690f4d728fbdc4c41e028d7b)](https://www.loom.com/share/975f61806b4848f9bce1c3b54cfc3e01?sharedAppSource=personal_library)
