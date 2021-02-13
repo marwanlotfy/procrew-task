@@ -29,4 +29,4 @@ from the browser or `GET` request from [postman]([https://www.postman.com/downlo
 
 ## Features
 
-![Watch the video](https://www.loom.com/i/96a07b3588ac4de2900952897e965fd0)](https://www.loom.com/share/cb37ef5da739466f8edc5930277bffcb)
+[![Watch the video](https://www.loom.com/i/96a07b3588ac4de2900952897e965fd0)](https://www.loom.com/share/cb37ef5da739466f8edc5930277bffcb)
