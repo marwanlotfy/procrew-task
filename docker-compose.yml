@@ -69,14 +69,14 @@ services:
       - SYS_NICE
     volumes: 
       - ./mysql:/var/lib/mysql
-  migration:
-    networks: 
-      - procrew
-    image: procrew_user_list_service:latest
-    command: ["./wait-for-it.git/wait-for-it.sh", "db:3306", "--", "composer", "run", "migrate"]
-    depends_on: 
-      - db
-    links: 
-      - db
+  # migration:
+  #   networks: 
+  #     - procrew
+  #   image: procrew_user_list_service:latest
+  #   command: ["./wait-for-it.git/wait-for-it.sh", "db:3306", "--", "composer", "run", "migrate"]
+  #   depends_on: 
+  #     - db
+  #   links: 
+  #     - db
 networks: 
   procrew:
