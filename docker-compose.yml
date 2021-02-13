@@ -7,6 +7,7 @@ services:
     build: 
       context: ./gateway
       dockerfile: Dockerfile
+    image: api_gateway:latest
     depends_on: 
       - user_create_service
       - user_list_service
@@ -28,6 +29,7 @@ services:
     build: 
       context: ./queue-worker
       dockerfile: Dockerfile
+    image: queue_worker:latest
     depends_on: 
       - rabbitmq3 
       - db
@@ -39,10 +41,9 @@ services:
     build: 
       context: ./user-create-service
       dockerfile: Dockerfile
+    image: user_create_service:latest
     depends_on: 
       - db
-    ports: 
-      - "3000:3000"
   user_list_service:
     container_name: user_list_service
     networks:
@@ -50,10 +51,9 @@ services:
     build: 
       context: ./user-list-service 
       dockerfile: Dockerfile
+    image: user_list_service:latest
     depends_on: 
       - db
-    ports: 
-      - "8000:8000"
     links: 
       - db
   db:
@@ -69,14 +69,14 @@ services:
       - SYS_NICE
     volumes: 
       - ./mysql:/var/lib/mysql
-  # migration:
-  #   networks: 
-  #     - procrew
-  #   image: procrew_user_list_service:latest
-  #   command: ["./wait-for-it.git/wait-for-it.sh", "db:3306", "--", "composer", "run", "migrate"]
-  #   depends_on: 
-  #     - db
-  #   links: 
-  #     - db
+  migration:
+    networks: 
+      - procrew
+    image: user_list_service:latest
+    command: ["./wait-for-it.git/wait-for-it.sh", "db:3306", "--", "composer", "run", "migrate"]
+    depends_on: 
+      - db
+    links: 
+      - db
 networks: 
   procrew:
