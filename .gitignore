@@ -1,2 +1,4 @@
-/mysql
-/queue-data
+/mysql/*
+/mysql/*/**
+/queue-data/*
+/queue-data/*/**
